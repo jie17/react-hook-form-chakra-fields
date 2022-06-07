@@ -54,7 +54,7 @@ const MoneyField = ({
       rowStart={rowStart}
       rowEnd={rowEnd}
     >
-      {({ formState: { touched } }, fieldProps, { isInvalid }) => {
+      {({ formState: { touchedFields } }, fieldProps, { isInvalid }) => {
         const iconColor = isInvalid ? invalidColor : validColor;
 
         return (
@@ -62,7 +62,7 @@ const MoneyField = ({
             <Flex w="100%">
               <chakra.div flex={children ? '.7' : '1'}>
                 <MoneyInput {...fieldProps} {...props} id={id} />
-                {get(touched, name) && !children && (
+                {get(touchedFields, name) && !children && (
                   <InputRightElement>
                     {isInvalid ? (
                       <WarningIcon color={iconColor} w="20px" h="20px" />

@@ -52,7 +52,7 @@ const InputField = ({
       rowStart={rowStart}
       rowEnd={rowEnd}
     >
-      {({ formState: { touched } }, fieldProps, { isInvalid }) => {
+      {({ formState: { touchedFields } }, fieldProps, { isInvalid }) => {
         const isTextarea = as === 'textarea';
         const iconColor = isInvalid ? invalidColor : validColor;
 
@@ -64,7 +64,7 @@ const InputField = ({
               as={isTextarea ? Textarea : as}
               id={id}
             />
-            {touched[name] && !isTextarea && (
+            {touchedFields[name] && !isTextarea && (
               <InputRightElement>
                 {isInvalid ? (
                   <WarningIcon color={iconColor} w="20px" h="20px" />

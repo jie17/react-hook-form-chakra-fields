@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 
 import en from 'date-fns/locale/en-GB';
-import 'react-datepicker/dist/react-datepicker.css';
+// import 'react-datepicker/dist/react-datepicker.css';
 
 import { DatePickerStyles } from './DatePickerStyles';
 

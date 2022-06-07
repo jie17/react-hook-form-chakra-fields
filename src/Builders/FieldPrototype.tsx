@@ -3,7 +3,7 @@ import {
   Controller,
   ControllerRenderProps,
   useFormContext,
-  UseFormMethods,
+  UseFormReturn,
 } from 'react-hook-form';
 import { get } from 'lodash';
 
@@ -30,7 +30,7 @@ interface InnerPrototypeProps {
 
 interface IProps extends Omit<FieldControlProps, 'children' | 'errorText'> {
   children: (
-    methods: UseFormMethods,
+    methods: UseFormReturn,
     controllerProps: ControllerRenderProps,
     innerProps: InnerPrototypeProps
   ) => ReactElement;
@@ -44,11 +44,11 @@ const FieldPrototype = ({
   ...props
 }: IProps) => {
   const methods = useFormContext();
-  const isInvalid = Boolean(get(methods.errors, name));
+  const isInvalid = Boolean(get(methods.formState.errors, name));
 
   return (
     <FieldControl
-      errorText={get(methods.errors, name)?.message}
+      errorText={get(methods.formState.errors, name)?.message}
       isInvalid={isInvalid}
       name={name}
       isRequired={isRequired}
@@ -57,7 +57,7 @@ const FieldPrototype = ({
       <Controller
         name={name}
         render={props => {
-          return children(methods, props, { isInvalid });
+          return children(methods, props.field, { isInvalid });
         }}
       />
     </FieldControl>
